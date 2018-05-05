@@ -10,11 +10,6 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <artifactId>Adapters</artifactId>
-        <groupId>com.ibm.jp.questionnaire</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
     <groupId>LDAPUserLogin</groupId>
     <artifactId>LDAPUserLogin</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -85,6 +80,7 @@
                 <groupId>com.ibm.mfp</groupId>
                 <artifactId>adapter-maven-plugin</artifactId>
                 <extensions>true</extensions>
+                <version>8.0.2018031101</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
