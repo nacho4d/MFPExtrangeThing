@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Licensed Materials - Property of IBM
+	5725-I43 (C) Copyright IBM Corp. 2011, 2016. All Rights Reserved.
+	US Government Users Restricted Rights - Use, duplication or
+	disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<mfp:adapter name="LDAPUserLogin"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mfp="http://www.ibm.com/mfp/integration"
+	xmlns:http="http://www.ibm.com/mfp/integration/http">
+
+	<displayName>LDAPUserLogin</displayName>
+	<description>LDAPUserLogin</description>
+
+	<securityCheckDefinition name="LDAPUserLogin" class="com.ibm.jp.questionnaire.LDAPLoginSecurityCheck">
+		<property name="maxAttempts" defaultValue="300" displayName="How many attempts are allowed"/>
+		<property name="blockedStateExpirationSec" defaultValue="10" displayName="How long before the client can try again (seconds)"/>
+		<property name="successStateExpirationSec" defaultValue="36000" displayName="How long is a successful state valid for (seconds)"/>
+		<property name="rememberMeDurationSec" defaultValue="120" description="How long is the user remembered by the RememberMe feature (seconds)."/>
+
+	</securityCheckDefinition>
+
+</mfp:adapter>

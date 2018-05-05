@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Licensed Materials - Property of IBM
+	5725-I43 (C) Copyright IBM Corp. 2011, 2016. All Rights Reserved.
+	US Government Users Restricted Rights - Use, duplication or
+	disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>Adapters</artifactId>
+        <groupId>com.ibm.jp.questionnaire</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <groupId>LDAPUserLogin</groupId>
+    <artifactId>LDAPUserLogin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>adapter</packaging>
+    <name>LDAPUserLogin</name>
+
+    <properties>
+        <!-- Use UTF-8 as the encoding of the adapter -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- MobileFirst adapter deployment properties -->
+        <mfpfUrl>http://localhost:9080/mfpadmin</mfpfUrl>
+        <mfpfUser>admin</mfpfUser>
+        <mfpfPassword>admin</mfpfPassword>
+        <mfpfRuntime>mfp</mfpfRuntime>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ibm.mfp</groupId>
+            <artifactId>adapter-maven-api</artifactId>
+            <scope>provided</scope>
+            <version>8.0.2018022601</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.mfp</groupId>
+            <artifactId>mfp-security-checks-base</artifactId>
+            <version>[8.0.0,9.0.0)</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.db2.jcc</groupId>
+            <artifactId>db2jcc4</artifactId>
+            <version>10.1</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.github.trevershick</groupId>-->
+            <!--<artifactId>ldap-test-utils</artifactId>-->
+            <!--<version>2.0.0</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.unboundid</groupId>
+            <artifactId>unboundid-ldapsdk</artifactId>
+            <version>4.0.5</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.ibm.mfp</groupId>
+                <artifactId>adapter-maven-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
