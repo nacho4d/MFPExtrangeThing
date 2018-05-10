@@ -28,7 +28,15 @@ public class LDAPLoginSecurityCheck extends UserAuthenticationSecurityCheck {
 
     static Logger logger = LogUtil.getLogger(LDAPSecurityCheckConfig.class.getName());
 
-    private LDAPUser user;
+    // When I use LDAPUser object there are problems when using requestWithDelegate method in iOS
+    // Also, randomly userId becomes null after a while.
+    //private LDAPUser user;
+
+    String userId;
+    String userDisplayName;
+    Integer userPrivilege = null;
+    boolean userRememberMe;
+
     private ResponseCode responseCode;
 
     ByteArrayOutputStream logBuffer = null;
@@ -37,11 +45,11 @@ public class LDAPLoginSecurityCheck extends UserAuthenticationSecurityCheck {
     protected AuthenticatedUser createUser() {
         logger.info("createUser " + logUser());
         HashMap<String, Object> m = new HashMap<>();
-        m.put("isSysAdmin", user != null && user.isSysAdmin());
-        m.put("isMediaAdmin", user != null && user.isMediaAdmin());
+        m.put("isSysAdmin", userPrivilege != null && userPrivilege == 0);
+        m.put("isMediaAdmin", userPrivilege != null && (userPrivilege == 0 || userPrivilege == 1));
         AuthenticatedUser authenticatedUser = new AuthenticatedUser(
-                user == null ? null : user.getUserId(),
-                user == null ? null : user.getDisplayName(),
+                userId,
+                userDisplayName,
                 this.getName(), m);
         return authenticatedUser;
     }
@@ -76,13 +84,11 @@ public class LDAPLoginSecurityCheck extends UserAuthenticationSecurityCheck {
 
         logger.info("searchLDAP1 -> IBMJ001? No ldaps at all");
         if (username.equals("IBMJ001")) {
-            user = new LDAPUser();
-            user.setUserId("IBMJ001");
-            user.setDisplayName("IBM Admin");
-            user.setFirstName("");
-            user.setLastName("");
-            user.setPrivilege(0);
-            user.setRememberMe(rememberMe);
+            userId = "IBMJ001";
+            userDisplayName = "IBM Admin";
+            userPrivilege = 0;
+            userRememberMe = rememberMe;
+
             logger.info("searchLDAP1 -> IBMJ001 will return GRANTED!!");
             responseCode = ResponseCode.GRANTED;
             return true;
@@ -111,7 +117,7 @@ public class LDAPLoginSecurityCheck extends UserAuthenticationSecurityCheck {
     @Override
     protected boolean rememberCreatedUser() {
         logger.info("rememberCreatedUser " + logUser());
-        return user != null && user.isRememberMe();
+        return userRememberMe;
     }
 
     private String logUser() {
